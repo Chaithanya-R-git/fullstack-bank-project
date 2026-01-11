@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <div class="logo">
+    Corporate Banking
+  </div>
+
+  <div class="menu">
+
+    <!-- RM MENU -->
+    <a *ngIf="role === 'RM'" routerLink="/rm">RM Dashboard</a>
+
+    <!-- ANALYST MENU -->
+    <a *ngIf="role === 'ANALYST'" routerLink="/analyst">Analyst Dashboard</a>
+
+    <!-- ADMIN MENU -->
+    <a *ngIf="role === 'ADMIN'" routerLink="/admin">Admin Dashboard</a>
+
+    <button (click)="logout()">Logout</button>
+  </div>
+</nav>

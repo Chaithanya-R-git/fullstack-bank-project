@@ -1,0 +1,119 @@
+<h1>ADMIN DASHBOARD</h1>
+<hr>
+
+<h2>Create User</h2>
+
+<form #userForm="ngForm" (ngSubmit)="createUser()">
+
+  <!-- Username -->
+  <input
+    placeholder="Username"
+    name="username"
+    [(ngModel)]="newUser.username"
+    required
+    #username="ngModel">
+
+  <div class="error-text"
+       *ngIf="username.touched && username.invalid">
+    Username is required
+  </div>
+  <br>
+
+  <!-- Email -->
+  <input
+    placeholder="Email"
+    name="email"
+    [(ngModel)]="newUser.email"
+    required
+    email
+    #email="ngModel">
+
+  <div class="error-text"
+       *ngIf="email.touched && email.errors?.['required']">
+    Email is required
+  </div>
+  <div class="error-text"
+       *ngIf="email.touched && email.errors?.['email']">
+    Enter a valid email format
+  </div>
+  <br>
+
+  <!-- Password -->
+  <input
+    placeholder="Password"
+    type="password"
+    name="password"
+    [(ngModel)]="newUser.password"
+    required
+    minlength="6"
+    #password="ngModel">
+
+  <div class="error-text"
+       *ngIf="password.touched && password.errors?.['required']">
+    Password is required
+  </div>
+  <div class="error-text"
+       *ngIf="password.touched && password.errors?.['minlength']">
+    Password must be at least 6 characters
+  </div>
+  <br>
+
+  <!-- Role -->
+  <select
+    name="role"
+    [(ngModel)]="newUser.role"
+    required
+    #role="ngModel">
+
+    <option value="">-- Select Role --</option>
+    <option value="RM">RM</option>
+    <option value="ANALYST">ANALYST</option>
+  </select>
+
+  <div class="error-text"
+       *ngIf="role.touched && role.invalid">
+    Role is required
+  </div>
+
+  <br><br>
+
+  <!-- Submit -->
+  <button type="submit" [disabled]="userForm.invalid">
+    Create User
+  </button>
+
+</form>
+
+<hr>
+
+<h2>Users</h2>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+
+  <tr *ngFor="let user of users">
+    <td>{{ user.username }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.role }}</td>
+    <td>
+      <span
+        [style.color]="user.active ? 'green' : 'red'">
+        {{ user.active ? 'ACTIVE' : 'INACTIVE' }}
+      </span>
+    </td>
+    <td>
+      <button (click)="toggleStatus(user)">
+        {{ user.active ? 'Deactivate' : 'Activate' }}
+      </button>
+    </td>
+  </tr>
+</table>
+
+<br>
+<button (click)="logout()">Logout</button>

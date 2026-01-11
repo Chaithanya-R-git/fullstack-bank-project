@@ -1,0 +1,150 @@
+<h2>RM Dashboard</h2>
+<hr>
+
+<h3>Create Client</h3>
+
+<h3>Total Clients: {{ totalClients }}</h3>
+<h3>Total Requests: {{ totalRequests }}</h3>
+<h3>Pending Requests: {{ pendingRequests }}</h3>
+
+<form [formGroup]="clientForm" (ngSubmit)="createClient()">
+
+  <!-- Company Name -->
+  <input placeholder="Company Name" formControlName="companyName">
+  <div class="error-text"
+       *ngIf="clientForm.get('companyName')?.touched &&
+              clientForm.get('companyName')?.invalid">
+    Company Name is required
+  </div>
+  <br>
+
+  <!-- Industry -->
+  <input placeholder="Industry" formControlName="industry">
+  <div class="error-text"
+       *ngIf="clientForm.get('industry')?.touched &&
+              clientForm.get('industry')?.invalid">
+    Industry is required
+  </div>
+  <br>
+
+  <!-- Address -->
+  <input placeholder="Address" formControlName="address">
+  <div class="error-text"
+       *ngIf="clientForm.get('address')?.touched &&
+              clientForm.get('address')?.invalid">
+    Address is required
+  </div>
+  <br>
+
+  <!-- Contact Name -->
+  <input placeholder="Contact Name" formControlName="contactName">
+  <div class="error-text"
+       *ngIf="clientForm.get('contactName')?.touched &&
+              clientForm.get('contactName')?.invalid">
+    Contact Name is required
+  </div>
+  <br>
+
+  <!-- Contact Email -->
+  <input placeholder="Contact Email" formControlName="contactEmail">
+  <div class="error-text"
+       *ngIf="clientForm.get('contactEmail')?.touched &&
+              clientForm.get('contactEmail')?.errors?.['required']">
+    Email is required
+  </div>
+  <div class="error-text"
+       *ngIf="clientForm.get('contactEmail')?.touched &&
+              clientForm.get('contactEmail')?.errors?.['email']">
+    Enter a valid email format
+  </div>
+  <br>
+
+  <!-- Contact Phone -->
+  <input placeholder="Contact Phone" formControlName="contactPhone">
+  <div class="error-text"
+       *ngIf="clientForm.get('contactPhone')?.touched &&
+              clientForm.get('contactPhone')?.invalid">
+    Contact Phone is required
+  </div>
+  <br>
+
+  <!-- Annual Turnover -->
+  <input type="number"
+         placeholder="Annual Turnover"
+         formControlName="annualTurnover">
+  <div class="error-text"
+       *ngIf="clientForm.get('annualTurnover')?.touched &&
+              clientForm.get('annualTurnover')?.invalid">
+    Annual Turnover must be greater than 0
+  </div>
+  <br>
+
+  <!-- Documents -->
+  <label>
+    <input type="checkbox" formControlName="documentsSubmitted">
+    Documents Submitted
+  </label>
+  <br><br>
+
+  <!-- Submit -->
+  <button type="submit" [disabled]="clientForm.invalid">
+    Create Client
+  </button>
+
+</form>
+
+<hr>
+
+<h3>My Clients</h3>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Company</th>
+    <th>Industry</th>
+    <th>Turnover</th>
+    <th>Contact</th>
+    <th>Credit</th>
+  </tr>
+
+  <tr *ngFor="let c of clients">
+    <td>{{ c.companyName }}</td>
+    <td>{{ c.industry }}</td>
+    <td>{{ c.annualTurnover }}</td>
+    <td>{{ c.primaryContact?.name }}</td>
+    <td>
+      <app-credit-request [clientId]="c.id"></app-credit-request>
+    </td>
+  </tr>
+</table>
+
+<hr>
+
+<h3>Credit Requests</h3>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Amount</th>
+    <th>Tenure</th>
+    <th>Purpose</th>
+    <th>Status</th>
+    <th>Submitted By</th>
+    <th>Created At</th>
+  </tr>
+
+  <tr *ngFor="let cr of creditRequests">
+    <td>{{ cr.requestAmount }}</td>
+    <td>{{ cr.tenureMonths }}</td>
+    <td>{{ cr.purpose }}</td>
+    <td>
+      <span
+        [style.color]="cr.status === 'PENDING' ? 'orange' : 'green'">
+        {{ cr.status }}
+      </span>
+    </td>
+    <td>{{ cr.submittedBy }}</td>
+    <td>{{ cr.createdAt | date:'short' }}</td>
+  </tr>
+</table>
+
+<br>
+<button (click)="logout()">Logout</button>

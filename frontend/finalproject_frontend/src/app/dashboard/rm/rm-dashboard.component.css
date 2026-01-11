@@ -1,0 +1,42 @@
+input, textarea, select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;   /* slate-300 */
+  background: #f8fafc;        /* slate-50 */
+}
+
+button {
+  background: #0f766e;        /* teal-700 */
+  color: #ffffff;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #115e59;        /* teal-800 */
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th {
+  background: #134e4a;        /* teal-900 */
+  color: #ffffff;
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+  color: #0f172a;             /* slate-900 */
+}
+
+tr:nth-child(even) {
+  background: #f1f5f9;        /* slate-100 */
+}

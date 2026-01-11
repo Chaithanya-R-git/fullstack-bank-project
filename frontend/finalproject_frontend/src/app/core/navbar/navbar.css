@@ -1,0 +1,36 @@
+.navbar {
+  height: 60px;
+  background: #0f766e;      /* teal-700 */
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ecfeff;           /* light cyan */
+}
+
+.menu a {
+  color: #f0fdfa;           /* teal-50 */
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+  color: #ccfbf1;           /* teal-100 */
+}
+
+.menu button {
+  background: #b91c1c;      /* red-700 */
+  border: none;
+  padding: 6px 12px;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+}

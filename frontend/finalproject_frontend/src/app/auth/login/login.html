@@ -1,0 +1,55 @@
+<h1>Login</h1>
+<div class="login-container">
+  <h2>Corporate Bank Portal</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+<input
+  type="text"
+  placeholder="Username"
+  formControlName="username">
+
+<div class="error-text"
+     *ngIf="loginForm.get('username')?.touched &&
+            loginForm.get('username')?.invalid">
+  Username is required
+</div>
+
+<input
+  type="password"
+  placeholder="Password"
+  formControlName="password">
+
+<div class="error-text"
+     *ngIf="loginForm.get('password')?.touched &&
+            loginForm.get('password')?.invalid">
+  Password is required
+</div>
+
+<button [disabled]="loginForm.invalid">
+  Login
+</button>
+
+  </form>
+</div>
+
+<!-- <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+  <input
+    type="text"
+    placeholder="Username"
+    formControlName="username"
+  />
+
+  <br /><br />
+
+  <input
+    type="password"
+    placeholder="Password"
+    formControlName="password"
+  />
+
+  <br /><br />
+
+  <button type="submit">Login</button>
+
+</form> -->

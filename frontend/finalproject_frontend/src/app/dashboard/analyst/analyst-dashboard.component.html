@@ -1,0 +1,67 @@
+<hr>
+<h3>Dashboard Summary</h3>
+
+<div style="display:flex; gap:20px; margin-bottom:20px;">
+  <div class="card">Total Requests<br><b>{{ total }}</b></div>
+  <div class="card">Pending<br><b>{{ pending }}</b></div>
+  <div class="card">Approved<br><b>{{ approved }}</b></div>
+  <div class="card">Rejected<br><b>{{ rejected }}</b></div>
+</div>
+
+<hr>
+
+
+<h2>Analyst – Credit Requests</h2>
+
+<table border="1" cellpadding="8" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Tenure (Months)</th>
+      <th>Purpose</th>
+      <th>Status</th>
+      <th>Submitted By</th>
+      <th>Created At</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <!-- ✅ DATA ROWS -->
+    <tr *ngFor="let cr of creditRequests">
+      <td>{{ cr.requestAmount }}</td>
+      <td>{{ cr.tenureMonths }}</td>
+      <td>{{ cr.purpose }}</td>
+
+      <td>
+        <span
+          [style.color]="
+            cr.status === 'PENDING' ? 'orange' :
+            cr.status === 'APPROVED' ? 'green' : 'red'
+          ">
+          {{ cr.status }}
+        </span>
+      </td>
+
+      <td>{{ cr.submittedBy }}</td>
+      <td>{{ cr.createdAt | date:'short' }}</td>
+
+      <td *ngIf="cr.status === 'PENDING'">
+        <button (click)="updateStatus(cr.id, 'APPROVED')">Approve</button>
+        <button (click)="updateStatus(cr.id, 'REJECTED')">Reject</button>
+      </td>
+
+      <td *ngIf="cr.status !== 'PENDING'">—</td>
+    </tr>
+
+    <!-- ✅ EMPTY STATE -->
+    <tr *ngIf="creditRequests.length === 0">
+      <td colspan="7" align="center">
+        No credit requests found
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<button (click)="logout()">Logout</button>

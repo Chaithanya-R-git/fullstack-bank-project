@@ -1,0 +1,15 @@
+<h4>Raise Credit Request</h4>
+
+<form [formGroup]="creditForm" (ngSubmit)="submitCreditRequest()">
+  <input type="number" placeholder="Amount" formControlName="requestAmount"><br>
+  <input type="number" placeholder="Tenure (months)" formControlName="tenureMonths"><br>
+  <input placeholder="Purpose" formControlName="purpose"><br>
+
+  <select disabled>
+    <option>PENDING</option>
+  </select><br>
+
+  <textarea placeholder="Remarks" formControlName="remarks"></textarea><br>
+
+  <button type="submit">Submit Credit Request</button>
+</form>
